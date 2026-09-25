@@ -1,5 +1,6 @@
-from praticando.errors.exceptions import UsuarioNaoEncontrado, PedidoNaoEncontrado, SenhaIncorreta
+from praticando.errors.exceptions import UsuarioNaoEncontrado, PedidoNaoEncontrado, SenhaIncorreta, UsuarioJaExiste
 from flask import jsonify
+from marshmallow import ValidationError
 
 def register_errors(app):
     @app.errorhandler(UsuarioNaoEncontrado)
@@ -13,4 +14,11 @@ def register_errors(app):
     @app.errorhandler(SenhaIncorreta)
     def senha_incorreta():
         return jsonify({"error":"Senha Incorreta!"}), 400
-    
+
+    @app.errorhandler(ValidationError)
+    def validation_error(error):
+        return jsonify({"error":error.messages})
+
+    @app.errorhandler(UsuarioJaExiste)
+    def usuario_ja_existe():
+        return jsonify({"error":"Usuário já existe!"})

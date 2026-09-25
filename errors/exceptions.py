@@ -6,3 +6,6 @@ class PedidoNaoEncontrado(Exception):
 
 class SenhaIncorreta(Exception):
     pass
+
+class UsuarioJaExiste(Exception):
+    pass
