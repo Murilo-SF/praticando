@@ -7,3 +7,11 @@ class Usuario(db.Model):
     senha = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(50), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'nome':self.nome,
+            'email':self.email,
+            'role':self.role
+        }
