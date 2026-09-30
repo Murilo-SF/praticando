@@ -5,4 +5,4 @@ class SchemaPedido(Schema):
     cliente_id = fields.Int(required=True)
     valor = fields.Float(required=True)
 
-shema_pedido = SchemaPedido()
+schema_pedido = SchemaPedido()

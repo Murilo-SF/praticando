@@ -4,15 +4,15 @@ from marshmallow import ValidationError
 
 def register_errors(app):
     @app.errorhandler(UsuarioNaoEncontrado)
-    def usuario_nao_encontrado():
+    def usuario_nao_encontrado(error):
         return jsonify({"error":"Usuário não encontrado!"}), 404
     
     @app.errorhandler(PedidoNaoEncontrado)
-    def pedido_nao_encontrado():
+    def pedido_nao_encontrado(error):
         return jsonify({"error":"Pedido não encontrado!"}), 404
     
     @app.errorhandler(SenhaIncorreta)
-    def senha_incorreta():
+    def senha_incorreta(error):
         return jsonify({"error":"Senha Incorreta!"}), 400
 
     @app.errorhandler(ValidationError)
@@ -20,5 +20,5 @@ def register_errors(app):
         return jsonify({"error":error.messages})
 
     @app.errorhandler(UsuarioJaExiste)
-    def usuario_ja_existe():
-        return jsonify({"error":"Usuário já existe!"})
+    def usuario_ja_existe(error):
+        return jsonify({"error":"Usuário já existe!"}), 400
