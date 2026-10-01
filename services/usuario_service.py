@@ -10,4 +10,22 @@ def service_buscar_meu_usuario(id):
         if not usuario:
             raise UsuarioNaoEncontrado()
     
-        return jsonify ({"usuario":[i.to_dict() for i in usuario]}), 200
+        return jsonify ({"usuario":[usuario.to_dict()]}), 200
+
+def service_admin():
+      return jsonify({"message": "Bem-vindo Administrador!"}), 200
+
+def service_buscar_todos_usuarios():
+
+      usuarios = Usuario.query.all()
+
+      return jsonify ({"usuarios": [usuario.to_dict() for usuario in usuarios]}), 200
+
+def service_buscar_usuario_id(id):
+
+      usuario = db.session.get(Usuario, id)
+
+      if not usuario:
+            raise UsuarioNaoEncontrado()
+
+      return jsonify({"usuario": usuario.to_dict()}), 200

@@ -1,5 +1,4 @@
 from praticando.extensions import db
-from flask import jsonify
 
 class Usuario(db.Model):
     __tablename__ = 'usuarios'
@@ -10,9 +9,9 @@ class Usuario(db.Model):
     role = db.Column(db.String(50), nullable=False)
 
     def to_dict(self):
-        return jsonify({
+        return {
             'id':self.id,
             'nome':self.nome,
             'email':self.email,
             'role':self.role
-        })
+        }

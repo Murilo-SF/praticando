@@ -9,3 +9,6 @@ class SenhaIncorreta(Exception):
 
 class UsuarioJaExiste(Exception):
     pass
+
+class AcessoNegado(Exception):
+    pass

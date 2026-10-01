@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 #------------------------------------------------------ROUTES--------------------------------------------------------
 from praticando.routes.routes_auth import auth_bp
 from praticando.routes.routes_usuario import usuario_bp
+from praticando.routes.routes_pedidos import pedidos_bp
 
 #------------------------------------------------------CONFIG--------------------------------------------------------
 from praticando.config import Config
@@ -27,6 +28,7 @@ def create_app():
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(usuario_bp)
+    app.register_blueprint(pedidos_bp)
 
     register_errors(app)
 
