@@ -8,6 +8,8 @@ class Usuario(db.Model):
     email = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(50), nullable=False)
 
+    pedidos = db.relationship('Pedido', backref='usuarios', lazy=True)
+
     def to_dict(self):
         return {
             'id':self.id,

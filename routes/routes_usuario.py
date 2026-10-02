@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from praticando.services.usuario_service import *
 from praticando.decorators.auth_decorator import role_required
@@ -25,3 +25,14 @@ def buscar_usuarios():
 @role_required('admin')
 def buscar_usuario_id(id):
     return service_buscar_usuario_id(id)
+
+@usuario_bp.route('/atualizar/<int:id>', methods=['PUT'])
+@role_required('admin')
+def atualizar_usuario(id):
+    data = request.get_json()
+    return service_atualizar_usuario(data, id)
+
+@usuario_bp.route('/deletar/<int:id>', methods=['DELETE'])
+@role_required('admin')
+def deletar_usuario(id):
+    return service_deletar_usuario(id)

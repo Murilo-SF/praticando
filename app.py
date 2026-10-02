@@ -7,7 +7,7 @@ from praticando.routes.routes_usuario import usuario_bp
 from praticando.routes.routes_pedidos import pedidos_bp
 
 #------------------------------------------------------CONFIG--------------------------------------------------------
-from praticando.config import Config
+from praticando.config import configs
 
 #------------------------------------------------------DATABASE------------------------------------------------------
 from praticando.extensions import db
@@ -17,10 +17,11 @@ from praticando.errors.handlers import register_errors
 
 jwt = JWTManager()
 
-def create_app():
+def create_app(config="DevelopmentConfig"):
+    
     app = Flask(__name__)
 
-    app.config.from_object(Config)
+    app.config.from_object(configs[config])
 
     db.init_app(app)
 
