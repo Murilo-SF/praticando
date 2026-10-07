@@ -48,7 +48,7 @@ def service_atualizar_usuario(data, id):
       usuario.role = role
       usuario.email = email
 
-      db.session.commit()
+      db.session.flush()
 
       return jsonify ({"message": "Usuário atualizado com sucesso!", "usuario": usuario.to_dict()}), 200
 
@@ -60,6 +60,6 @@ def service_deletar_usuario(id):
             raise UsuarioNaoEncontrado()
 
       db.session.delete(usuario)
-      db.session.commit()
+      db.session.flush()
 
       return jsonify({"message":"Usuário deletado com sucesso!"}), 200

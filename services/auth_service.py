@@ -22,7 +22,7 @@ def service_registrar_usuario(data):
     novo_usuario = Usuario(nome=nome, senha=generate_password_hash(senha), role=role, email=email)
 
     db.session.add(novo_usuario)
-    db.session.commit()
+    db.session.flush()
 
     return jsonify({"message":"Usuário cadastrado com sucesso!"}), 201
 

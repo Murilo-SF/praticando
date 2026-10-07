@@ -13,11 +13,11 @@ def register_errors(app):
     
     @app.errorhandler(SenhaIncorreta)
     def senha_incorreta(error):
-        return jsonify({"error":"Senha Incorreta!"}), 400
+        return jsonify({"error":"Senha Incorreta!"}), 401
 
     @app.errorhandler(ValidationError)
     def validation_error(error):
-        return jsonify({"error":error.messages})
+        return jsonify({"error":error.messages}), 400
 
     @app.errorhandler(UsuarioJaExiste)
     def usuario_ja_existe(error):

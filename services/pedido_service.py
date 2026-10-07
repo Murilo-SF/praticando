@@ -17,7 +17,7 @@ def service_registrar_meu_pedido(data, id):
 
     db.session.add(novo_pedido)
 
-    db.session.commit()
+    db.session.flush()
 
     return jsonify ({"message": "Pedido registrado com sucesso!","pedido":novo_pedido.to_dict()}), 201
 
@@ -34,7 +34,7 @@ def service_registrar_pedido_admin(data, id):
 
     db.session.add(novo_pedido)
 
-    db.session.commit()
+    db.session.flush()
 
     return jsonify({"message":"Pedido registrado com sucesso!", "pedido":novo_pedido.to_dict()}), 201
 
@@ -78,7 +78,7 @@ def service_atualizar_pedido(data, pedido_id):
     pedido.cliente_id = cliente_id
     pedido.valor = valor
 
-    db.session.commit()
+    db.session.flush()
 
     return jsonify ({"message": "Pedido atualizado com sucesso!","pedido":pedido.to_dict()}), 200
 
@@ -95,6 +95,6 @@ def service_deletar_pedido(cliente_id, pedido_id):
         raise UsuarioNaoEncontrado()
 
     db.session.delete(pedido)
-    db.session.commit()
+    db.session.flush()
 
     return jsonify ({"message":"Pedido deletado com sucesso!"}), 200

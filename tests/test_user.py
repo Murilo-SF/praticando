@@ -44,3 +44,15 @@ def test_update_user_without_admin(client, admin, header_user):
     assert response.status_code == 403
     assert "error" in response.get_json()
     assert response.get_json()["error"] == "Acesso negado!"
+
+def test_delete_user(client, user, header_admin):
+    response = client.delete(f'/usuario/deletar/{user.id}', headers=header_admin)
+    assert response.status_code == 200
+    assert "message" in response.get_json()
+    assert response.get_json()["message"] == "Usuário deletado com sucesso!"
+
+def test_delete_user_without_admin(client, user, header_user):
+    response = client.delete(f'/usuario/deletar/{user.id}', headers=header_user)
+    assert response.status_code == 403
+    assert "error" in response.get_json()
+    assert response.get_json()["error"] == "Acesso negado!"

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_jwt_extended import JWTManager
 
 #------------------------------------------------------ROUTES--------------------------------------------------------
@@ -8,6 +8,7 @@ from praticando.routes.routes_pedidos import pedidos_bp
 
 #------------------------------------------------------CONFIG--------------------------------------------------------
 from praticando.config import configs
+from praticando.transactions.transaction import init_transaction
 
 #------------------------------------------------------DATABASE------------------------------------------------------
 from praticando.extensions import db
@@ -32,6 +33,8 @@ def create_app(config="DevelopmentConfig"):
     app.register_blueprint(pedidos_bp)
 
     register_errors(app)
+
+    init_transaction(app)
 
     return app
 

@@ -3,23 +3,26 @@ from praticando.extensions import db
 from praticando.app import create_app
 from praticando.models.tabela_usuario import Usuario
 from werkzeug.security import generate_password_hash
-
+# ------------------------------------------Fixture app------------------------------------------
 @pytest.fixture(scope="session")
 def app():
     app = create_app("TestingConfig")
     with app.app_context():
         yield app
 
+# -----------------------------------------Fixture Client----------------------------------------
 @pytest.fixture()
 def client(app):
     return app.test_client()
 
+# ----------------------------------------Fixture session----------------------------------------
 @pytest.fixture()
 def session(app):
     db_session = db.session()
     yield db_session
     db_session.rollback()
 
+# -----------------------------Fixture admin, token and header_admin-----------------------------
 @pytest.fixture()
 def admin(session):
     admin_user = Usuario(nome="Admin User", senha=generate_password_hash("123456"), role="admin", email="NULL")
@@ -38,6 +41,7 @@ def header_admin(token_admin):
     headers_admin = {"Authorization":f"Bearer {token_admin}"}
     return headers_admin
 
+# ------------------------------Fixture user, token and header_user------------------------------
 @pytest.fixture()
 def user(session):
     new_user = Usuario(nome="Usuário Comum", senha=generate_password_hash("123456"), role="user", email="NULL")
